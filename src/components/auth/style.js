@@ -19,11 +19,11 @@ export const Button = styled.button`
   height: 30px;
   width: 100%;
   background-color: ${(props) =>
-    props.disabled ? props.theme.accentColor : props.theme.grayColor};
+    props.disabled === false ? props.theme.accentColor : props.theme.grayColor};
   color: white;
   border-radius: 9px;
   margin: 30px 0;
-  cursor: ${(props) => (props.disabled ? "pointer" : "")};
+  cursor: ${(props) => (props.disabled === false ? "pointer" : "")};
 `;
 
 export const AuthFooter = styled.div`

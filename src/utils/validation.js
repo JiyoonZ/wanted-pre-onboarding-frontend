@@ -1,17 +1,14 @@
-import {useEffect, useState} from "react";
-
-const useValidation = (values) => {
-  const [isValid, setIsValid] = useState(false);
-
-  useEffect(() => {
-    if (values.email.match(/@/) && values.password.length >= 8) {
-      setIsValid(true);
-    } else {
-      setIsValid(false);
-    }
-  }, [values.email, values.password]);
-
-  return isValid;
+export const validation = (values) => {
+  if (values.email.match(/@/) && values.password.length >= 8) {
+    return true;
+  } else {
+    return false;
+  }
 };
 
-export default useValidation;
+export const validationSignUp = (values) => {
+  if (values.password === values.checkPassword) {
+    return true;
+  }
+  return false;
+};
