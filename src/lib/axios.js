@@ -1,7 +1,7 @@
 import {getToken} from "./authToken";
 import Axios from "axios";
 
-// 토큰 갱신후 헤더 변경
+// 요청 보낼때마다 헤더에 토큰 담아서 보내기
 const axios = Axios.create({
   baseURL: process.env.REACT_APP_API_URL,
 });

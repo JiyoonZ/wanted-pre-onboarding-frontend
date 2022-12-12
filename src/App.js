@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import GlobalStyle from "./styles/GlobalStyle";
 import Auth from "./pages/Auth";
+import Todo from "./pages/Todo";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Auth />} />
+          <Route path="/todo" element={<Todo />} />
         </Routes>
       </Router>
     </>
