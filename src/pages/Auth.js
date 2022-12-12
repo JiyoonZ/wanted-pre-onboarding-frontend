@@ -1,33 +1,40 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import * as C from "../components/auth/style";
 import {validation, validationSignUp} from "../utils/validation";
 import Container from "../styles/Container";
-import {Signup} from "../lib/api";
-import {setToken} from "../lib/authToken";
+import {Signin, Signup} from "../lib/api";
+import {setToken} from "../utils/authToken";
 import {useNavigate} from "react-router-dom";
 
+const INIT_VAL = {
+  email: "",
+  password: "",
+  checkPassword: "",
+};
 function Auth() {
   const [existUser, setExistUser] = useState(true);
-  const [values, setValues] = useState({
-    email: "",
-    password: "",
-    checkPassword: "",
-  });
+  const [values, setValues] = useState(INIT_VAL);
   const navigate = useNavigate();
   const isUser = () => {
     setExistUser((prev) => !prev);
   };
+  useEffect(() => {
+    setValues(INIT_VAL);
+    console.log("chekc!!");
+  }, [existUser]);
 
   const changeHandler = (evt) => {
     const {name, value} = evt.target;
     setValues({...values, [name]: value});
-    console.log(values, validationSignUp(values));
   };
   const sumbitHandler = async (evt) => {
     evt.preventDefault();
     const postVal = {email: values.email, password: values.password};
     if (existUser) {
       // 기존회원 로그인
+      const resp = await Signin(postVal);
+      navigate("/todo");
+      console.log(resp, "로그인");
     } else {
       //회원가입일때
       const resp = await Signup(postVal);
@@ -84,10 +91,14 @@ function Auth() {
         )}
         <C.Button disabled={disabledHandler()}>로그인</C.Button>
       </form>
-      {existUser && (
+      {existUser ? (
         <C.AuthFooter>
           <span>회원이 아니신가요? </span>
           <span onClick={isUser}>회원가입하기</span>
+        </C.AuthFooter>
+      ) : (
+        <C.AuthFooter>
+          <span onClick={isUser}>로그인 하러가기</span>
         </C.AuthFooter>
       )}
     </Container>

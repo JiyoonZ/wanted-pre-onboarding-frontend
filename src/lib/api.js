@@ -1,6 +1,6 @@
 import axios from "./axios";
 
-export const requestSignin = async (values) => {
+export const Signin = async (values) => {
   const response = await axios.post(`/auth/signin`, values);
 
   return response;

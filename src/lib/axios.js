@@ -1,4 +1,4 @@
-import {getToken} from "./authToken";
+import {getToken} from "../utils/authToken";
 import Axios from "axios";
 
 // 요청 보낼때마다 헤더에 토큰 담아서 보내기
@@ -37,6 +37,7 @@ axios.interceptors.response.use(
     // 400 중복 이메일 있을때
     if (errorResponse.status === 400) {
       alert("해당 이메일은 이미 존재합니다!");
+      window.location.href = "/";
     }
     return Promise.reject(error);
   }
