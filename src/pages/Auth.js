@@ -2,6 +2,7 @@ import {useState} from "react";
 import * as C from "../components/auth/style";
 import {validation, validationSignUp} from "../utils/validation";
 import Container from "../styles/Container";
+import {Signup} from "../lib/api";
 
 function Auth() {
   const [existUser, setExistUser] = useState(true);
@@ -19,9 +20,11 @@ function Auth() {
     setValues({...values, [name]: value});
     console.log(values, validationSignUp(values));
   };
-  const sumbitHandler = (evt) => {
+  const sumbitHandler = async (evt) => {
     evt.preventDefault();
-    console.log(values);
+    const postVal = {email: values.email, password: values.password};
+    const resp = await Signup(postVal);
+    console.log(resp);
   };
   const disabledHandler = () => {
     if (validation(values)) {
