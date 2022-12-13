@@ -15,6 +15,7 @@ function TodoItem({todo, refresh}) {
   };
   const editHandler = () => {
     setIsEdit((prev) => !prev);
+    setEditTodo(todo.todo);
   };
   const changeHandler = (evt) => {
     const {

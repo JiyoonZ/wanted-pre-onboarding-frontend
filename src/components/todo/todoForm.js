@@ -10,13 +10,17 @@ function TodoForm({refresh}) {
       target: {value},
     } = evt;
     setNewTodo(value);
+    console.log(value);
   };
   const sumbitHandler = async (evt) => {
     evt.preventDefault();
-    await postTodo(newTodo);
-    inputRef.current.value = "";
-    inputRef.current.focus();
-    refresh();
+    if (newTodo) {
+      await postTodo(newTodo);
+      inputRef.current.value = "";
+      inputRef.current.focus();
+      setNewTodo("");
+      refresh();
+    }
   };
   return (
     <>

@@ -12,7 +12,7 @@ function Auth() {
   return (
     <Container>
       <C.Title>{existUser ? "로그인" : "회원가입"}</C.Title>
-      <AuthForm existUser={existUser} />
+      <AuthForm existUser={existUser} isUser={isUser} />
       {existUser ? (
         <C.AuthFooter>
           <span>회원이 아니신가요? </span>

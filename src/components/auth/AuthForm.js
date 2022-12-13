@@ -10,16 +10,15 @@ const INIT_VAL = {
   password: "",
   checkPassword: "",
 };
-function AuthForm({existUser}) {
+function AuthForm({existUser, isUser}) {
   const [values, setValues] = useState(INIT_VAL);
   const navigate = useNavigate();
+
   const changeHandler = (evt) => {
     const {name, value} = evt.target;
     setValues({...values, [name]: value});
   };
-  useEffect(() => {
-    setValues(INIT_VAL);
-  }, [existUser]);
+  useEffect(() => {}, [existUser]);
 
   const sumbitHandler = async (evt) => {
     evt.preventDefault();
@@ -31,10 +30,8 @@ function AuthForm({existUser}) {
       navigate("/todo");
     } else {
       //회원가입일때
-      const resp = await Signup(postVal);
-      // 토큰 담아서 로컬스토리지에 저장하기
-      setToken(resp.data.access_token);
-      navigate("/todo");
+      await Signup(postVal);
+      isUser();
       window.location.href = "/";
     }
   };
@@ -80,7 +77,9 @@ function AuthForm({existUser}) {
             />
           </C.InputGroup>
         )}
-        <C.Button disabled={disabledHandler()}>로그인</C.Button>
+        <C.Button disabled={disabledHandler()}>
+          {existUser ? "로그인" : "회원가입"}
+        </C.Button>
       </form>
     </>
   );

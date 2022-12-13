@@ -45,7 +45,9 @@ axios.interceptors.response.use(
     ) {
       alert("해당 이메일은 이미 존재합니다!");
       window.location.href = "/";
+      // redirect("/");
     }
+
     return Promise.reject(error);
   }
 );
