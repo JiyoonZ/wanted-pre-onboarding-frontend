@@ -1,6 +1,6 @@
 import {useEffect, useRef, useState} from "react";
 import styled from "styled-components";
-import {deleteTodo, updateTodo} from "../../lib/api";
+import {deleteTodo, updateTodo} from "../../api/api";
 
 function TodoItem({todo, refresh}) {
   const [isEdit, setIsEdit] = useState(false);

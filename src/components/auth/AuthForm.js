@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
-import {Signin, Signup} from "../../lib/api";
+import {Signin, Signup} from "../../api/api";
 import {validation, validationSignUp} from "../../utils/validation";
 import {setToken} from "../../utils/authToken";
 import * as C from "./style";

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {useState, useRef} from "react";
-import {postTodo} from "../../lib/api";
+import {postTodo} from "../../api/api";
 
 function TodoForm({refresh}) {
   const [newTodo, setNewTodo] = useState();
