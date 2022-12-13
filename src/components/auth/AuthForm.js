@@ -19,7 +19,6 @@ function AuthForm({existUser}) {
   };
   useEffect(() => {
     setValues(INIT_VAL);
-    console.log("chekc!!", existUser);
   }, [existUser]);
 
   const sumbitHandler = async (evt) => {
@@ -30,11 +29,9 @@ function AuthForm({existUser}) {
       const resp = await Signin(postVal);
       setToken(resp.data.access_token);
       navigate("/todo");
-      console.log(resp, "로그인");
     } else {
       //회원가입일때
       const resp = await Signup(postVal);
-      console.log(resp);
       // 토큰 담아서 로컬스토리지에 저장하기
       setToken(resp.data.access_token);
       navigate("/todo");

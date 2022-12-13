@@ -28,14 +28,21 @@ axios.interceptors.response.use(
   },
   async function (error) {
     const {response: errorResponse} = error;
-    const originalRequest = error.config;
+    // const originalRequest = error.config;
 
     // 인증 에러 발생시
-    if (errorResponse.status === 401) {
-      return await axios(originalRequest);
+    if (
+      errorResponse.status === 401 &&
+      error.response.data.message === "Unauthorized"
+    ) {
+      alert("아이디와 비밀번호를 확인해주세요");
+      window.location.href = "/";
     }
     // 400 중복 이메일 있을때
-    if (errorResponse.status === 400) {
+    if (
+      errorResponse.status === 400 &&
+      error.response.data.message === "동일한 이메일이 이미 존재합니다."
+    ) {
       alert("해당 이메일은 이미 존재합니다!");
       window.location.href = "/";
     }

@@ -4,8 +4,12 @@ import {useEffect, useRef, useState} from "react";
 import {getTodos, postTodo} from "../lib/api";
 import TodoItem from "../components/todo/TodoItem";
 import TodoForm from "../components/todo/TodoForm";
+import * as C from "../components/auth/style";
+import {removeToken} from "../utils/authToken";
+import {useNavigate} from "react-router-dom";
 function Todo() {
   const [todos, setTodos] = useState();
+  const navigate = useNavigate();
   useEffect(() => {
     refresh();
   }, []);
@@ -13,10 +17,14 @@ function Todo() {
     const resp = await getTodos();
     setTodos(resp.data);
   };
-
+  const delTokenHandler = async () => {
+    removeToken();
+    navigate("/");
+  };
   return (
     <Container>
-      <h1>TODOLIST🚀</h1>
+      <Logout onClick={delTokenHandler}>로그아웃</Logout>
+      <Title>Todo List</Title>
       <TodoForm refresh={refresh} />
       <TodoList>
         {todos &&
@@ -31,7 +39,17 @@ function Todo() {
 const TodoList = styled.div`
   height: 400px;
   overflow: auto;
-  /* border: 1px black solid; */
 `;
-
+const Title = styled.h1`
+  font-size: 30px;
+  font-weight: 600;
+  text-align: center;
+`;
+const Logout = styled.p`
+  font-size: 13px;
+  text-align: end;
+  color: ${(props) => props.theme.accentColor};
+  text-decoration: underline;
+  cursor: pointer;
+`;
 export default Todo;
