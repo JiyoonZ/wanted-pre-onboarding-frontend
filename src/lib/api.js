@@ -26,10 +26,10 @@ export const postTodo = async (todoText) => {
   return response;
 };
 
-export const editTodo = async ({id, prevTodo, newTodo, isChecked}) => {
+export const updateTodo = async (id, todo, isCompleted) => {
   const response = await axios.put(`/todos/${id}`, {
-    todo: newTodo ? newTodo : prevTodo,
-    isCompleted: isChecked,
+    todo,
+    isCompleted,
   });
 
   return response;

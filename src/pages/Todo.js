@@ -4,7 +4,6 @@ import {useEffect, useRef, useState} from "react";
 import {getTodos, postTodo} from "../lib/api";
 import TodoItem from "../components/todo/TodoItem";
 import TodoForm from "../components/todo/TodoForm";
-
 function Todo() {
   const [todos, setTodos] = useState();
   useEffect(() => {
@@ -12,9 +11,9 @@ function Todo() {
   }, []);
   const refresh = async () => {
     const resp = await getTodos();
-    console.log(resp.data, "확인");
     setTodos(resp.data);
   };
+
   return (
     <Container>
       <h1>TODOLIST🚀</h1>
