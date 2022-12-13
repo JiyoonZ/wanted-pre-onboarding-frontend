@@ -1,8 +1,14 @@
 import styled from "styled-components";
+import {deleteTodo} from "../../lib/api";
 
-function TodoItem({todo}) {
-  const delHandler = (id) => {
-    alert(id);
+function TodoItem({todo, refresh}) {
+  const delHandler = async (id) => {
+    const isDel = window.confirm("정말 삭제하시겠습니까?");
+    if (isDel) {
+      const resp = await deleteTodo(id);
+      console.log(resp, "삭제");
+      refresh();
+    }
   };
 
   return (

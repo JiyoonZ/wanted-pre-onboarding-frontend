@@ -20,7 +20,10 @@ function Todo() {
       <h1>TODOLIST🚀</h1>
       <TodoForm refresh={refresh} />
       <TodoList>
-        {todos && todos.map((todo) => <TodoItem key={todo.id} todo={todo} />)}
+        {todos &&
+          todos.map((todo) => (
+            <TodoItem key={todo.id} todo={todo} refresh={refresh} />
+          ))}
       </TodoList>
     </Container>
   );
