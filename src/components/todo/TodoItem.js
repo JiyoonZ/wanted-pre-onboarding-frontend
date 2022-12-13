@@ -10,7 +10,6 @@ function TodoItem({todo, refresh}) {
     const isDel = window.confirm("정말 삭제하시겠습니까?");
     if (isDel) {
       const resp = await deleteTodo(id);
-      console.log(resp, "삭제");
       refresh();
     }
   };
@@ -21,12 +20,15 @@ function TodoItem({todo, refresh}) {
     const {
       target: {value},
     } = evt;
-    console.log(value);
     setEditTodo(value);
   };
   const submitEdidTodo = () => {
     setIsEdit((prev) => !prev);
+    if (window.confirm("정말 수정하시겠습니까?")) {
+      updateApi();
+    }
   };
+
   const completeHandler = async () => {
     setIsChecked((prev) => !prev);
   };
@@ -46,14 +48,16 @@ function TodoItem({todo, refresh}) {
             <TodoBox
               as="input"
               autoFocus={true}
-              defaultValue={todo.todo}
+              defaultValue={editTodo}
               isEdit={true}
               onChange={changeHandler}
             />
             <EditBtn isEdit={true} onClick={submitEdidTodo}>
               확인
             </EditBtn>
-            <DelBtn isEdit={true}>취소</DelBtn>
+            <DelBtn isEdit={true} onClick={editHandler}>
+              취소
+            </DelBtn>
           </>
         ) : (
           <>
@@ -63,7 +67,7 @@ function TodoItem({todo, refresh}) {
               onChange={completeHandler}
             ></CheckBox>
             <TodoBox isEdit={false}>
-              {isChecked ? <s>{todo.todo}</s> : todo.todo}
+              {isChecked ? <s>{editTodo}</s> : editTodo}
             </TodoBox>
             <EditBtn onClick={editHandler}>수정</EditBtn>
             <DelBtn
