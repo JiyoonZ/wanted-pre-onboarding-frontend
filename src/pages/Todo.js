@@ -1,10 +1,9 @@
 import Container from "../styles/Container";
 import styled from "styled-components";
-import {useEffect, useRef, useState} from "react";
-import {getTodos, postTodo} from "../api/api";
+import {useEffect, useState} from "react";
+import {getTodos} from "../api/api";
 import TodoItem from "../components/todo/TodoItem";
 import TodoForm from "../components/todo/TodoForm";
-import * as C from "../components/auth/style";
 import {removeToken} from "../utils/authToken";
 import {useNavigate} from "react-router-dom";
 function Todo() {
