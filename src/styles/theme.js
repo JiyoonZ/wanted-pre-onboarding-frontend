@@ -3,4 +3,5 @@ export const themeColor = {
   accentColor: "#3F8CF2",
   grayColor: "#DADFE9",
   cardColor: "white",
+  warnColor: "#f24130",
 };
